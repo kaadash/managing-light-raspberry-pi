@@ -1,0 +1,22 @@
+{
+  "name": "managing-light",
+  "version": "0.0.0",
+  "authors": [
+    "kaadash <arturkudel@gmail.com>"
+  ],
+  "description": "managing light by raspberry pi",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6"
+  }
+}
