@@ -7,14 +7,31 @@
     exec('cat /sys/bus/w1/devices/28-0000056d465d/w1_slave | cut -d " " -f 10 | grep "t=" | cut -d "=" -f 2 2>&1',$outputTemperature, $returnTemperatureValue);
     return $outputTemperature[0]/1000;
   }
+
   function getCurrentLightLevel() {
     exec('cat outputFile 2>&1', $outputLevelLight, $returnLightValue);
-    return $outputLevelLight[0] * 20 . '%';
+    return $outputLevelLight[0] . '%';
   }
+
+function turnOnLight() {
+	exec('sudo python turnOnLight.py');
+}
+
+function turnOffLight() {
+	exec('sudo python turnOffLight.py');
+}
 
   if (isset($_GET['isReady'])) {
     $outputLevelLight = getCurrentLightLevel();
     $outputTemperature = getCurrentTemperature();
+  }
+// TODO: Fix this http methods
+  if(isset($_GET["turnLight"]) && trim($_GET["turnLight"]) == 'on'){
+    turnOnLight();   
+  }
+
+  if(isset($_GET["turnLight"]) && trim($_GET["turnLight"]) == 'off'){
+     turnOffLight();
   }
 ?>
 <head>
@@ -47,7 +64,11 @@
   </div>
   <div class="col-md-12 text-center">
       <a class="btn btn-success" href='index.php?isReady=true'>Refresh</a>
-  </div>
+      <a class="btn btn-success" href='index.php?turnLight=on'>Turn on Light</a>
+      <a class="btn btn-danger" href='index.php?turnLight=off'>Turn off light</a>
+  
+    
+</div>
 </body>
 </html>
 
